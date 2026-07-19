@@ -3,145 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexaCord • Custom Discord Bots Matrix</title>
+    <title>NexaCord • Custom Automation Frameworks</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-main: #030206;
-            --bg-card: rgba(12, 8, 20, 0.55);
-            --text-main: #f3f4f6;
+            --bg-main: #020806;
+            --bg-card: rgba(4, 16, 12, 0.45);
+            --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --primary: #c084fc;
-            --border: rgba(192, 132, 252, 0.1);
+            --primary: #a855f7;
+            --border: rgba(168, 85, 247, 0.12);
+            --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { 
-            background-color: var(--bg-main); color: var(--text-main); padding: 40px 20px; line-height: 1.6;
-            /* Cyber Ambient Purple Digital Code Array Background Image */
+            background-color: var(--bg-main); color: var(--text-main); padding: 60px 24px; line-height: 1.7;
             background-image: 
-                linear-gradient(to bottom, rgba(3, 2, 6, 0.88), #030206),
+                linear-gradient(to bottom, rgba(2, 8, 6, 0.85), #020806),
                 url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1920&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-size: cover; background-position: center; background-attachment: fixed;
         }
         
-        .container { max-width: 1100px; margin: 0 auto; animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .container { max-width: 1200px; margin: 0 auto; animation: revealUp 1s var(--ease-smooth) forwards; }
+        @keyframes revealUp { from { opacity: 0; transform: translateY(30px); filter: blur(5px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
         
-        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; margin-bottom: 40px; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
-        .back-link:hover { color: var(--primary); }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; margin-bottom: 50px; font-weight: 600; font-size: 1rem; transition: all 0.5s var(--ease-smooth); }
+        .back-link:hover { color: var(--primary); transform: translateX(-4px); }
         
-        h1 { font-size: 3rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.03em; }
-        .subtitle { color: var(--text-muted); margin-bottom: 50px; font-size: 1.15rem; max-width: 700px; }
+        h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.04em; background: linear-gradient(135deg, #fff 60%, #e9d5ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { color: var(--text-muted); margin-bottom: 60px; font-size: 1.25rem; max-width: 800px; }
         
-        .grid-plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .grid-plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 36px; margin-bottom: 80px; }
+        
         .plan-card { 
-            background: var(--bg-card); border: 1px solid var(--border); padding: 44px; border-radius: 28px; 
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            display: flex; flex-direction: column; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            background: var(--bg-card); border: 1px solid var(--border); padding: 50px; border-radius: 32px; 
+            backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%);
+            display: flex; flex-direction: column; text-decoration: none; color: inherit;
+            transition: all 0.6s var(--ease-smooth);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
         .plan-card:hover { 
-            transform: translateY(-8px) scale(1.01); 
-            border-color: rgba(192, 132, 252, 0.4); 
-            box-shadow: 0 25px 50px rgba(192, 132, 252, 0.08); 
+            transform: translateY(-12px) scale(1.015); 
+            border-color: rgba(168, 85, 247, 0.4); 
+            box-shadow: 0 40px 80px rgba(168, 85, 247, 0.12), 0 0 30px rgba(168, 85, 247, 0.1); 
         }
         
-        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 24px; }
-        .plan-title { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.01em; }
-        .price { font-weight: 800; font-size: 1.6rem; color: #fff; background: linear-gradient(135deg, #fff, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 28px; }
+        .plan-title { font-weight: 800; font-size: 1.5rem; }
+        .price { font-weight: 800; font-size: 1.8rem; color: #fff; }
         
-        .features { list-style: none; margin-bottom: 32px; }
-        .features li { margin-bottom: 16px; color: var(--text-muted); font-size: 0.98rem; display: flex; align-items: flex-start; gap: 12px; }
-        .features li i { color: var(--primary); font-size: 0.9rem; margin-top: 5px; text-shadow: 0 0 10px var(--primary); }
+        .features { list-style: none; margin-bottom: 40px; flex-grow: 1; }
+        .features li { margin-bottom: 18px; color: var(--text-muted); font-size: 1.02rem; display: flex; align-items: flex-start; gap: 14px; }
+        .features li i { color: var(--primary); font-size: 0.95rem; margin-top: 6px; text-shadow: 0 0 10px var(--primary); }
 
-        .custom-strip { background: var(--bg-card); border: 1px solid var(--border); backdrop-filter: blur(20px); border-radius: 24px; padding: 36px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; margin-bottom: 80px; }
-        .custom-strip h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
-
-        .faq-section { background: rgba(255,255,255,0.01); border: 1px solid var(--border); backdrop-filter: blur(10px); border-radius: 28px; padding: 50px; }
-        .faq-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 30px; letter-spacing: -0.02em; }
-        .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; }
-        .faq-item h4 { font-size: 1.1rem; color: #fff; margin-bottom: 10px; }
-        .faq-item p { color: var(--text-muted); font-size: 0.95rem; }
+        .order-btn {
+            width: 100%; text-align: center; padding: 16px; border-radius: 16px;
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+            font-weight: 700; font-size: 1rem; color: #fff; transition: all 0.5s var(--ease-smooth);
+            margin-top: auto;
+        }
+        .plan-card:hover .order-btn {
+            background: linear-gradient(135deg, #c084fc, #9333ea);
+            border-color: transparent; box-shadow: 0 15px 30px rgba(147, 51, 234, 0.3);
+        }
+        
+        /* Expanded System Spec Blueprint Zone */
+        .spec-breakdown {
+            background: rgba(255,255,255,0.01); border: 1px solid var(--border);
+            backdrop-filter: blur(20px); border-radius: 36px; padding: 60px; margin-bottom: 80px;
+        }
+        .spec-breakdown h2 { font-size: 2rem; font-weight: 800; margin-bottom: 20px; }
+        .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+        .spec-item h4 { font-size: 1.2rem; margin-bottom: 10px; color: #fff; }
+        .spec-item p { color: var(--text-muted); font-size: 0.98rem; line-height: 1.7; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Control Panel</a>
+        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Return to Main Terminal</a>
         
-        <h1>Custom Discord Bots</h1>
-        <p class="subtitle">High-performance private automation engines built utilizing Node.js and robust cloud architectures for seamless execution loops.</p>
+        <h1>Custom Discord Applications</h1>
+        <p class="subtitle">Fault-tolerant code structures, persistent real-time object mapping layers, and optimized thread management frameworks tailored for robust system integration loops.</p>
         
         <div class="grid-plan">
-            <div class="plan-card">
+            <a href="https://discord.gg/wdQN4Um3t2" target="_blank" class="plan-card">
                 <div class="card-top">
                     <span class="plan-title" style="color: #10b981;">🟢 Core Automations</span>
                     <span class="price">₹149</span>
                 </div>
                 <ul class="features">
-                    <li><i class="fa-solid fa-square-check"></i> Standard Welcome Embed Arrays</li>
-                    <li><i class="fa-solid fa-square-check"></i> Modular Multi-Channel Logging Terminal</li>
-                    <li><i class="fa-solid fa-square-check"></i> Keyword Text Auto-Moderator Core</li>
-                    <li><i class="fa-solid fa-square-check"></i> Core General Command Utility Loops</li>
-                    <li><i class="fa-solid fa-square-check"></i> 7-Day Free Fix Structural Warranty</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Standard Welcome Embed Arrays</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Multi-Channel Modular Log Engine</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Regex Pattern Auto-Moderation Loops</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Interactive Command Interfaces</li>
+                    <li><i class="fa-solid fa-circle-check"></i> 7-Day Infrastructure Bug Coverage</li>
                 </ul>
-            </div>
+                <div class="order-btn">Deploy Core Package</div>
+            </a>
 
-            <div class="plan-card">
+            <a href="https://discord.gg/wdQN4Um3t2" target="_blank" class="plan-card">
                 <div class="card-top">
                     <span class="plan-title" style="color: #3b82f6;">🔵 System Matrix</span>
                     <span class="price">₹299</span>
                 </div>
                 <ul class="features">
-                    <li><i class="fa-solid fa-square-check"></i> Everything inside Core Automations</li>
-                    <li><i class="fa-solid fa-square-check"></i> Dropdown Interactive Support Tickets</li>
-                    <li><i class="fa-solid fa-square-check"></i> Complete Action Tracking Log Arrays</li>
-                    <li><i class="fa-solid fa-square-check"></i> Persistent Role Cache Upon Rejoin</li>
-                    <li><i class="fa-solid fa-square-check"></i> Custom Embed Button Components</li>
-                    <li><i class="fa-solid fa-square-check"></i> 14-Day Priority System Warranty</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Everything inside Core Automations</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Interactive Dropdown Support Tickets</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Deep Moderation Action Audit History</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Persistent Role-State Cache Modules</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Custom Dynamic Embed Component Nodes</li>
+                    <li><i class="fa-solid fa-circle-check"></i> 14-Day Elevated Warranty Tier</li>
                 </ul>
-            </div>
+                <div class="order-btn">Deploy System Matrix</div>
+            </a>
 
-            <div class="plan-card">
+            <a href="https://discord.gg/wdQN4Um3t2" target="_blank" class="plan-card">
                 <div class="card-top">
                     <span class="plan-title" style="color: #8b5cf6;">🟣 Premium Suite</span>
                     <span class="price">₹599</span>
                 </div>
                 <ul class="features">
-                    <li><i class="fa-solid fa-square-check"></i> Everything inside System Matrix</li>
-                    <li><i class="fa-solid fa-square-check"></i> Dedicated SQLite/JSON Data Storage</li>
-                    <li><i class="fa-solid fa-square-check"></i> Capcha Secure Verification Pipeline</li>
-                    <li><i class="fa-solid fa-square-check"></i> Server Economy & Leveling Engine</li>
-                    <li><i class="fa-solid fa-square-check"></i> Custom Business API Webhook Links</li>
-                    <li><i class="fa-solid fa-square-check"></i> 30-Day Complete Architecture Support</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Everything inside System Matrix</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Persistent SQLite / JSON Local Storage</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Captcha Security Gateway Verification</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Multi-Guild Economy & XP Aggregators</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Webhook Event Triggers & REST Integrations</li>
+                    <li><i class="fa-solid fa-circle-check"></i> 30-Day Comprehensive Maintenance Pool</li>
                 </ul>
-            </div>
+                <div class="order-btn">Deploy Premium Suite</div>
+            </a>
         </div>
 
-        <div class="custom-strip">
-            <div>
-                <h3>⚫ Enterprise Integration Layer</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem;">For custom panels, dynamic control wrappers, payment hooks, or machine-learning structures.</p>
-            </div>
-            <span style="font-weight: 700; color: var(--primary); font-size: 1.1rem;">Custom Quote Matrix</span>
-        </div>
-
-        <div class="faq-section">
-            <h3 class="faq-title">Technical Specification FAQ</h3>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <h4>Where are these bots hosted?</h4>
-                    <p>We provide standard clean deployment setup files. If hosting is required, we can link your application directly to high-uptime container architectures.</p>
+        <div class="spec-breakdown">
+            <h2>Detailed Framework Layering</h2>
+            <p>Every single application suite we write operates within isolated Node.js instances utilizing optimized event loops. This ensures that even during massive concurrent server message events, internal latency metrics stay below the 40ms threshold.</p>
+            <div class="spec-grid">
+                <div class="spec-item">
+                    <h4>Memory Safety Metrics</h4>
+                    <p>Explicitly configured memory garbage collection barriers prevent runtime stack overflows during persistent long-duration execution sessions.</p>
                 </div>
-                <div class="faq-item">
-                    <h4>Can I request feature revisions?</h4>
-                    <p>Yes, your targeted service warranty window covers unexpected configuration fixes and minor text/embed tweaks for free.</p>
+                <div class="spec-item">
+                    <h4>Modular Extensions</h4>
+                    <p>Built with decoupled object design schemes, allowing you to add more commands or features down the line without rebuilding from scratch.</p>
                 </div>
             </div>
         </div>
