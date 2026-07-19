@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexaCord • Minecraft Engineering</title>
+    <title>NexaCord • Minecraft Engineering Array</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -11,105 +11,137 @@
     
     <style>
         :root {
-            --bg-main: #040806;
-            --bg-card: rgba(8, 16, 12, 0.7);
+            --bg-main: #020604;
+            --bg-card: rgba(4, 12, 8, 0.55);
             --text-main: #f3f4f6;
             --text-muted: #94a3b8;
             --primary: #10b981;
-            --border: rgba(16, 185, 129, 0.08);
+            --border: rgba(16, 185, 129, 0.12);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { 
             background-color: var(--bg-main); color: var(--text-main); padding: 40px 20px; line-height: 1.6;
-            background-image: radial-gradient(circle at 50% -20%, rgba(16, 185, 129, 0.12) 0%, transparent 50%);
+            /* Emerald Cyber Obsidian Isometric Grid Image Setup */
+            background-image: 
+                linear-gradient(to bottom, rgba(2, 6, 4, 0.88), #020604),
+                url('https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
             background-attachment: fixed;
         }
         
         .container { max-width: 1100px; margin: 0 auto; animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
         .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; margin-bottom: 40px; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
-        .back-link:hover { color: #fff; }
+        .back-link:hover { color: var(--primary); }
         
-        h1 { font-size: 2.75rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.03em; }
-        .subtitle { color: var(--text-muted); margin-bottom: 50px; font-size: 1.1rem; }
+        h1 { font-size: 3rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.03em; }
+        .subtitle { color: var(--text-muted); margin-bottom: 50px; font-size: 1.15rem; max-width: 700px; }
         
-        .grid-plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 40px; }
+        .grid-plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 60px; }
         .plan-card { 
-            background: var(--bg-card); border: 1px solid var(--border); padding: 36px; border-radius: 24px; 
-            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-            display: flex; flex-direction: column; transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: var(--bg-card); border: 1px solid var(--border); padding: 44px; border-radius: 28px; 
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            display: flex; flex-direction: column; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
-        .plan-card:hover { transform: translateY(-6px); border-color: rgba(16, 185, 129, 0.3); box-shadow: 0 20px 40px rgba(16, 185, 129, 0.04); }
+        .plan-card:hover { 
+            transform: translateY(-8px) scale(1.01); 
+            border-color: rgba(16, 185, 129, 0.4); 
+            box-shadow: 0 25px 50px rgba(16, 185, 129, 0.06); 
+        }
         
-        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; }
-        .plan-title { font-weight: 700; font-size: 1.3rem; letter-spacing: -0.01em; }
-        .price { font-weight: 800; font-size: 1.5rem; color: #fff; background: linear-gradient(135deg, #fff, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 24px; }
+        .plan-title { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.01em; }
+        .price { font-weight: 800; font-size: 1.6rem; color: #fff; background: linear-gradient(135deg, #fff, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        .features { list-style: none; margin-bottom: 24px; }
-        .features li { margin-bottom: 14px; color: var(--text-muted); font-size: 0.95rem; display: flex; align-items: center; gap: 12px; }
-        .features li i { color: var(--primary); font-size: 0.9rem; }
+        .features { list-style: none; margin-bottom: 32px; }
+        .features li { margin-bottom: 16px; color: var(--text-muted); font-size: 0.98rem; display: flex; align-items: flex-start; gap: 12px; }
+        .features li i { color: var(--primary); font-size: 0.9rem; margin-top: 5px; text-shadow: 0 0 10px var(--primary); }
 
-        .custom-strip { background: linear-gradient(90deg, rgba(16, 185, 129, 0.05), rgba(8,16,12,0.7)); border: 1px solid var(--border); border-radius: 20px; padding: 24px 36px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-        .custom-strip h3 { font-size: 1.25rem; }
+        .custom-strip { background: var(--bg-card); border: 1px solid var(--border); backdrop-filter: blur(20px); border-radius: 24px; padding: 36px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; margin-bottom: 80px; }
+        .custom-strip h3 { font-size: 1.4rem; font-weight: 700; }
+
+        .tech-specs { background: rgba(0,0,0,0.2); border: 1px solid var(--border); backdrop-filter: blur(10px); border-radius: 28px; padding: 50px; }
+        .tech-specs h3 { font-size: 1.8rem; font-weight: 800; margin-bottom: 24px; }
+        .spec-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .spec-box { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.03); padding: 24px; border-radius: 16px; }
+        .spec-box h4 { margin-bottom: 8px; color: var(--primary); }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Return to Home</a>
+        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Control Panel</a>
         
-        <h1>Minecraft Server Engineering</h1>
-        <p class="subtitle">Deep core profiling, lag reductions, anti-cheat barriers, and bulletproof exploit network configs.</p>
+        <h1>Minecraft Network Engineering</h1>
+        <p class="subtitle">Deep core garbage collection tuning, asynchronous database connection handling, and hardened proxy defenses built for high player-count retention.</p>
         
         <div class="grid-plan">
             <div class="plan-card">
                 <div class="card-top">
-                    <span class="plan-title" style="color: #10b981;">🟢 Core Optimization</span>
+                    <span class="plan-title" style="color: #10b981;">Core Tweak Metrics</span>
                     <span class="price">₹299</span>
                 </div>
                 <ul class="features">
-                    <li><i class="fa-solid fa-hammer"></i> Paper / Purpur Setup Optimization</li>
-                    <li><i class="fa-solid fa-hammer"></i> Entity Tracking & Chunk Tuning</li>
-                    <li><i class="fa-solid fa-hammer"></i> Asynchronous Data Refactors</li>
-                    <li><i class="fa-solid fa-hammer"></i> Full TPS Lag Diagnostics</li>
+                    <li><i class="fa-solid fa-cube"></i> Paper / Purpur Engine File Profiling</li>
+                    <li><i class="fa-solid fa-cube"></i> Aggressive Entity Tracking Calculations</li>
+                    <li><i class="fa-solid fa-cube"></i> Asynchronous Chunk Loading Refactors</li>
+                    <li><i class="fa-solid fa-cube"></i> Network Buffer & Compression Tuning</li>
+                    <li><i class="fa-solid fa-cube"></i> Live Timings/Spark Diagnostics Audit</li>
                 </ul>
             </div>
 
             <div class="plan-card">
                 <div class="card-top">
-                    <span class="plan-title" style="color: #3b82f6;">🔵 Exploit & Nuke Defense</span>
+                    <span class="plan-title" style="color: #3b82f6;">Exploit Hardening</span>
                     <span class="price">₹499</span>
                 </div>
                 <ul class="features">
-                    <li><i class="fa-solid fa-shield-halved"></i> Crash Packet Vulnerability Patches</li>
-                    <li><i class="fa-solid fa-shield-halved"></i> Packet-Flooding Nuke Security</li>
-                    <li><i class="fa-solid fa-shield-halved"></i> Advanced Anti-Cheat Framework</li>
-                    <li><i class="fa-solid fa-shield-halved"></i> Core Engine Security Verification</li>
+                    <li><i class="fa-solid fa-shield-halved"></i> Crash Packet Vulnerability Barriers</li>
+                    <li><i class="fa-solid fa-shield-halved"></i> Packet Flooding & Payload Firewalls</li>
+                    <li><i class="fa-solid fa-shield-halved"></i> Specialized Anti-Cheat Engine Tuning</li>
+                    <li><i class="fa-solid fa-shield-halved"></i> Redstone Lag Machine Detection Arrays</li>
+                    <li><i class="fa-solid fa-shield-halved"></i> Server Core Exploit Vulnerability Audits</li>
                 </ul>
             </div>
 
             <div class="plan-card">
                 <div class="card-top">
-                    <span class="plan-title" style="color: #8b5cf6;">🟣 Complete Network Suite</span>
+                    <span class="plan-title" style="color: #8b5cf6;">Enterprise Infrastructure</span>
                     <span class="price">₹899</span>
                 </div>
                 <ul class="features">
-                    <li><i class="fa-solid fa-layer-group"></i> Everything in Optimization & Security</li>
-                    <li><i class="fa-solid fa-layer-group"></i> Velocity / Bungee Proxy Balancing</li>
+                    <li><i class="fa-solid fa-layer-group"></i> Everything in Optimization + Hardening</li>
+                    <li><i class="fa-solid fa-layer-group"></i> Velocity / Bungee Cord Load Balancing</li>
                     <li><i class="fa-solid fa-layer-group"></i> Cross-Server Module Synchronization</li>
-                    <li><i class="fa-solid fa-layer-group"></i> Direct MySQL/MariaDB Core Links</li>
+                    <li><i class="fa-solid fa-layer-group"></i> Central SQL Core Sync Configurations</li>
+                    <li><i class="fa-solid fa-layer-group"></i> Complete Multi-Server Launch Testing</li>
                 </ul>
             </div>
         </div>
 
         <div class="custom-strip">
             <div>
-                <h3>⚫ Custom Core Engine Build</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">For specialized cross-proxy mini-games or structural architectural forks.</p>
+                <h3>⚫ Absolute Engine Overhauls</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">For enterprise proxy loops, proprietary game modes, or custom structural setups.</p>
             </div>
-            <span style="font-weight: 700; color: var(--primary);">Quote Required</span>
+            <span style="font-weight: 700; color: var(--primary); font-size: 1.1rem;">Custom Quote Matrix</span>
+        </div>
+
+        <div class="tech-specs">
+            <h3>Supported Architecture Arrays</h3>
+            <div class="spec-list">
+                <div class="spec-box">
+                    <h4>Engine Substrates</h4>
+                    <p style="color: var(--text-muted); font-size:0.92rem;">Paper, Purpur, Pufferfish, Folia, Velocity, and Waterfall routing proxies.</p>
+                </div>
+                <div class="spec-box">
+                    <h4>Diagnostic Tooling</h4>
+                    <p style="color: var(--text-muted); font-size:0.92rem;">Spark Profiler, Canvas Engines, Memory Dump Audits, and Heap Tracking.</p>
+                </div>
+            </div>
         </div>
     </div>
 
