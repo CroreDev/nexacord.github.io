@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexaCord • Premium Development Studio</title>
+    <title>NexaCord • Architecture Studio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -11,98 +11,180 @@
     
     <style>
         :root {
-            --bg-main: #06080c;
-            --bg-card: #0d111a;
+            --bg-main: #04060a;
+            --bg-card: rgba(13, 17, 26, 0.7);
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
             --primary: #8b5cf6;
             --primary-glow: rgba(139, 92, 246, 0.15);
-            --border: #1e293b;
+            --border: rgba(255, 255, 255, 0.06);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg-main); color: var(--text-main); line-height: 1.6; }
+        
+        body { 
+            background-color: var(--bg-main); 
+            color: var(--text-main); 
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
 
-        /* Navbar */
+        /* Smooth Page Entrance Animation */
+        .animate-fade {
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Elegant Navbar */
         nav {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .logo { font-size: 1.5rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #fff; letter-spacing: -0.03em; }
         .logo span { color: var(--primary); }
-        .nav-links { display: flex; gap: 24px; list-style: none; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
-        .nav-links a:hover { color: #fff; }
+        .nav-links { display: flex; gap: 28px; list-style: none; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s ease; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
 
         /* Hero */
-        header { max-width: 1200px; margin: 60px auto 40px; padding: 0 20px; text-align: center; }
-        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--primary-glow); border: 1px solid rgba(139, 92, 246, 0.3); color: #a78bfa; padding: 6px 16px; border-radius: 100px; font-size: 0.85rem; font-weight: 600; margin-bottom: 24px; }
-        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 16px; background: linear-gradient(135deg, #fff 50%, #c084fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+        header { max-width: 1200px; margin: 80px auto 40px; padding: 0 20px; text-align: center; }
+        .hero-badge { 
+            display: inline-flex; align-items: center; gap: 8px; 
+            background: var(--primary-glow); border: 1px solid rgba(139, 92, 246, 0.2); 
+            color: #c084fc; padding: 6px 18px; border-radius: 100px; 
+            font-size: 0.8rem; font-weight: 700; margin-bottom: 24px;
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 20px; line-height: 1.1; background: linear-gradient(135deg, #fff 60%, #c084fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 620px; margin: 0 auto; font-weight: 400; }
 
-        /* Grid Services */
+        /* Category Grid Architecture */
         .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
         
-        .service-card { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; display: flex; flex-direction: column; transition: transform 0.2s, border-color 0.2s; position: relative; }
-        .service-card:hover { transform: translateY(-4px); border-color: rgba(139, 92, 246, 0.4); }
-        .icon-box { width: 48px; height: 48px; background: var(--primary-glow); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.25rem; margin-bottom: 20px; }
-        h3 { font-size: 1.35rem; font-weight: 700; margin-bottom: 12px; }
-        .card-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px; flex-grow: 1; }
+        .service-card { 
+            background: var(--bg-card); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border); 
+            border-radius: 24px; padding: 40px; 
+            display: flex; flex-direction: column; 
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
         
-        .explore-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.95rem; margin-top: auto; }
-        .explore-btn:hover i { transform: translateX(4px); }
-        .explore-btn i { transition: transform 0.2s; }
+        .service-card:hover { 
+            transform: translateY(-8px); 
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        
+        .icon-box { 
+            width: 56px; height: 56px; background: var(--primary-glow); 
+            border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 16px; 
+            display: flex; align-items: center; justify-content: center; 
+            color: var(--primary); font-size: 1.5rem; margin-bottom: 28px; 
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover .icon-box { transform: scale(1.1) rotate(5deg); }
+        
+        h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 14px; letter-spacing: -0.02em; }
+        .card-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 32px; flex-grow: 1; line-height: 1.6; }
+        
+        .explore-btn { display: inline-flex; align-items: center; gap: 8px; color: #fff; font-weight: 600; font-size: 0.95rem; margin-top: auto; transition: gap 0.2s; }
+        .service-card:hover .explore-btn { color: var(--primary); gap: 12px; }
 
-        footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; margin-top: 60px; }
+        /* Ordering Pipeline Section */
+        .section-title { font-size: 1.75rem; font-weight: 700; margin: 80px 0 32px; display: flex; align-items: center; gap: 12px; }
+        .process-flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+        .step-card { background: var(--bg-card); border: 1px solid var(--border); padding: 30px; border-radius: 20px; backdrop-filter: blur(10px); }
+        .step-num { font-size: 2rem; font-weight: 800; color: var(--primary); opacity: 0.4; margin-bottom: 12px; }
+        .step-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+        .step-desc { font-size: 0.9rem; color: var(--text-muted); }
+
+        footer { text-align: center; padding: 60px 20px 40px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; margin-top: 100px; }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo"><i class="fa-solid fa-bolt"></i> Nexa<span>Cord</span></div>
+    <nav class="animate-fade">
+        <div class="logo">⚡ Nexa<span>Cord</span></div>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html" class="active">Home</a></li>
             <li><a href="bots.html">Discord Bots</a></li>
             <li><a href="discord-setup.html">Server Setup</a></li>
             <li><a href="minecraft.html">Minecraft</a></li>
         </ul>
     </nav>
 
-    <header>
-        <div class="hero-badge"><i class="fa-solid fa-sparkles"></i> Everything you need to launch boldly</div>
-        <h1>Hosting & Development for every big idea.</h1>
-        <p class="hero-subtitle">Select a specialized infrastructure sector below to explore exact plans, feature breakdowns, and pricing matrices.</p>
+    <header class="animate-fade">
+        <div class="hero-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> High-Tier Performance Engineering</div>
+        <h1>Everything you need to<br>launch your project boldly.</h1>
+        <p class="hero-subtitle">Select a service category below to view our clear pricing schedules, design tiers, and feature frameworks.</p>
     </header>
 
-    <div class="container">
+    <div class="container animate-fade" style="animation-delay: 0.1s;">
         <div class="grid-3">
-            <!-- Card 1 -->
-            <div class="service-card">
+            <!-- Discord Bots Category Link -->
+            <a href="bots.html" class="service-card">
                 <div class="icon-box"><i class="fa-solid fa-robot"></i></div>
                 <h3>Custom Discord Bots</h3>
-                <p class="card-desc">Private automation frameworks, custom text interactive flows, integrated ticket routing pipelines, and robust database layers.</p>
-                <a href="bots.html" class="explore-btn">Explore Plans <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
+                <p class="card-desc">Tailor-made private application loops, persistent database storage, low-latency infrastructure, and interactive control panels.</p>
+                <span class="explore-btn">Explore Plans <i class="fa-solid fa-chevron-right"></i></span>
+            </a>
 
-            <!-- Card 2 -->
-            <div class="service-card">
+            <!-- Discord Server Architecture Link -->
+            <a href="discord-setup.html" class="service-card">
                 <div class="icon-box"><i class="fa-solid fa-network-wired"></i></div>
                 <h3>Discord Server Setup</h3>
-                <p class="card-desc">Algorithmic channel security, professional UI layout configurations, permissions syncing, and community onboarding retention flows.</p>
-                <a href="discord-setup.html" class="explore-btn">Explore Plans <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
+                <p class="card-desc">Stunning community architecture layouts, complex permission nodes, bulletproof anti-raid protection configurations, and clean role structures.</p>
+                <span class="explore-btn">Explore Plans <i class="fa-solid fa-chevron-right"></i></span>
+            </a>
 
-            <!-- Card 3 -->
-            <div class="service-card">
+            <!-- Minecraft Services Link -->
+            <a href="minecraft.html" class="service-card">
                 <div class="icon-box"><i class="fa-solid fa-cube"></i></div>
                 <h3>Minecraft Services</h3>
-                <p class="card-desc">Deep-level layer engine optimizations, exploit/nuke defense patches, anti-cheat tuning, and high-capacity network linking.</p>
-                <a href="minecraft.html" class="explore-btn">Explore Plans <i class="fa-solid fa-arrow-right"></i></a>
+                <p class="card-desc">Deep optimization adjustments, exploit protection engineering, high-performance network maps, and clean core scaling alignments.</p>
+                <span class="explore-btn">Explore Plans <i class="fa-solid fa-chevron-right"></i></span>
+            </a>
+        </div>
+
+        <div class="section-title"><i class="fa-solid fa-bars-staged" style="color:var(--primary)"></i> How To Order</div>
+        <div class="process-flow">
+            <div class="step-card">
+                <div class="step-num">01</div>
+                <div class="step-title">Open Ticket</div>
+                <div class="step-desc">Head to our Discord and click the Create Order button.</div>
+            </div>
+            <div class="step-card">
+                <div class="step-num">02</div>
+                <div class="step-title">Fill Form</div>
+                <div class="step-desc">Provide your target plan, budget limits, and project brief.</div>
+            </div>
+            <div class="step-card">
+                <div class="step-num">03</div>
+                <div class="step-title">Review & Pay</div>
+                <div class="step-desc">Approve the quote and process safe checkout via Google Pay.</div>
+            </div>
+            <div class="step-card">
+                <div class="step-num">04</div>
+                <div class="step-title">Get Delivery</div>
+                <div class="step-desc">Receive your finished framework right inside your private channel.</div>
             </div>
         </div>
     </div>
