@@ -11,84 +11,107 @@
     
     <style>
         :root {
-            --bg-main: #06080c;
-            --bg-card: #0d111a;
+            --bg-main: #05050a;
+            --bg-card: rgba(10, 10, 22, 0.7);
             --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --primary: #8b5cf6;
-            --border: #1e293b;
+            --text-muted: #94a3b8;
+            --primary: #c084fc;
+            --border: rgba(192, 132, 252, 0.08);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg-main); color: var(--text-main); padding: 40px 20px; }
+        body { 
+            background-color: var(--bg-main); color: var(--text-main); padding: 40px 20px; line-height: 1.6;
+            background-image: radial-gradient(circle at 50% -20%, rgba(192, 132, 252, 0.15) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
         
-        .container { max-width: 1000px; margin: 0 auto; }
-        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; margin-bottom: 30px; font-weight: 500; }
+        .container { max-width: 1100px; margin: 0 auto; cubic-bezier(0.16, 1, 0.3, 1) forwards; animation: fadeIn 0.6s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; margin-bottom: 40px; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
         .back-link:hover { color: #fff; }
         
-        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 8px; }
-        .subtitle { color: var(--text-muted); margin-bottom: 40px; }
+        h1 { font-size: 2.75rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.03em; }
+        .subtitle { color: var(--text-muted); margin-bottom: 50px; font-size: 1.1rem; }
         
-        .grid-plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .plan-card { background: var(--bg-card); border: 1px solid var(--border); padding: 28px; border-radius: 16px; display: flex; flex-direction: column; }
+        .grid-plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 40px; }
+        .plan-card { 
+            background: var(--bg-card); border: 1px solid var(--border); padding: 36px; border-radius: 24px; 
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            display: flex; flex-direction: column; transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .plan-card:hover { transform: translateY(-6px); border-color: rgba(192, 132, 252, 0.3); box-shadow: 0 20px 40px rgba(192, 132, 252, 0.05); }
         
-        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
-        .plan-title { font-weight: 700; font-size: 1.2rem; }
-        .price { font-weight: 800; font-size: 1.4rem; color: var(--primary); }
+        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; }
+        .plan-title { font-weight: 700; font-size: 1.3rem; letter-spacing: -0.01em; }
+        .price { font-weight: 800; font-size: 1.5rem; color: #fff; background: linear-gradient(135deg, #fff, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        .features { list-style: none; }
-        .features li { margin-bottom: 12px; color: var(--text-muted); font-size: 0.95rem; display: flex; align-items: center; gap: 10px; }
-        .features li i { color: var(--primary); font-size: 0.85rem; }
+        .features { list-style: none; margin-bottom: 24px; }
+        .features li { margin-bottom: 14px; color: var(--text-muted); font-size: 0.95rem; display: flex; align-items: center; gap: 12px; }
+        .features li i { color: var(--primary); font-size: 0.9rem; }
+
+        .custom-strip { background: linear-gradient(90deg, rgba(192, 132, 252, 0.05), rgba(10,10,22,0.7)); border: 1px solid var(--border); border-radius: 20px; padding: 24px 36px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .custom-strip h3 { font-size: 1.25rem; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Return to Home</a>
         
-        <h1>Choose your Discord plan.</h1>
-        <p class="subtitle">Bespoke dynamic features built natively for scale and performance stability.</p>
+        <h1>Custom Discord Bots</h1>
+        <p class="subtitle">Advanced automation frameworks tailored perfectly for your community infrastructure.</p>
         
         <div class="grid-plan">
             <div class="plan-card">
                 <div class="card-top">
-                    <span class="plan-title">Basic Bot</span>
+                    <span class="plan-title" style="color: #10b981;">🟢 Basic Bot</span>
                     <span class="price">₹149</span>
                 </div>
                 <ul class="features">
-                    <li><i class="fa-solid fa-check"></i> Welcome & Leave Logs</li>
-                    <li><i class="fa-solid fa-check"></i> Basic Text Commands</li>
-                    <li><i class="fa-solid fa-check"></i> Moderation System</li>
-                    <li><i class="fa-solid fa-check"></i> Basic Configuration</li>
+                    <li><i class="fa-solid fa-circle-dot"></i> Welcome & Leave Logs</li>
+                    <li><i class="fa-solid fa-circle-dot"></i> Basic Text Commands</li>
+                    <li><i class="fa-solid fa-circle-dot"></i> Standard Auto-Moderation</li>
+                    <li><i class="fa-solid fa-circle-dot"></i> Basic System Config</li>
                 </ul>
             </div>
 
             <div class="plan-card">
                 <div class="card-top">
-                    <span class="plan-title">Standard Bot</span>
+                    <span class="plan-title" style="color: #3b82f6;">🔵 Standard Bot</span>
                     <span class="price">₹299</span>
                 </div>
                 <ul class="features">
-                    <li><i class="fa-solid fa-check"></i> Everything in Basic</li>
-                    <li><i class="fa-solid fa-check"></i> Interactive Ticket Panels</li>
-                    <li><i class="fa-solid fa-check"></i> Action Logging Streams</li>
-                    <li><i class="fa-solid fa-check"></i> Auto Roles Allocation</li>
-                    <li><i class="fa-solid fa-check"></i> Buttons & Dropdown Menus</li>
+                    <li><i class="fa-solid fa-circle-dot"></i> Everything in Basic</li>
+                    <li><i class="fa-solid fa-circle-dot"></i> Support Ticket Pipelines</li>
+                    <li><i class="fa-solid fa-circle-dot"></i> Action Tracking Logs</li>
+                    <li><i class="fa-solid fa-circle-dot"></i> Persistent Auto Roles</li>
+                    <li><i class="fa-solid fa-circle-dot"></i> Interactive UI Components</li>
                 </ul>
             </div>
 
             <div class="plan-card">
                 <div class="card-top">
-                    <span class="plan-title">Premium Bot</span>
+                    <span class="plan-title" style="color: #8b5cf6;">🟣 Premium Bot</span>
                     <span class="price">₹599</span>
                 </div>
                 <ul class="features">
-                    <li><i class="fa-solid fa-check"></i> Everything in Standard</li>
-                    <li><i class="fa-solid fa-check"></i> Secure Database Persistence</li>
-                    <li><i class="fa-solid fa-check"></i> Member Verification Nodes</li>
-                    <li><i class="fa-solid fa-check"></i> Economy / Level Systems</li>
-                    <li><i class="fa-solid fa-check"></i> Fully Custom Features</li>
+                    <li><i class="fa-solid fa-circle-dot"></i> Everything in Standard</li>
+                    <li><i class="fa-solid fa-circle-dot"></i> SQLite Database Backends</li>
+                    <li><i class="fa-solid fa-circle-dot"></i> Secure Verification Panels</li>
+                    <li><i class="fa-solid fa-circle-dot"></i> Economy & Level Systems</li>
+                    <li><i class="fa-solid fa-circle-dot"></i> Fully Custom System Logic</li>
                 </ul>
             </div>
+        </div>
+
+        <div class="custom-strip">
+            <div>
+                <h3>⚫ Custom Development Bot</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">For unique systems, game logic setups, or production api hooks.</p>
+            </div>
+            <span style="font-weight: 700; color: var(--primary);">Quote Required</span>
         </div>
     </div>
 
