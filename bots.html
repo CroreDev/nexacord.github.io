@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexaCord • Custom Discord Bots</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-main: #06080c;
+            --bg-card: #0d111a;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --primary: #8b5cf6;
+            --border: #1e293b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-main); padding: 40px 20px; }
+        
+        .container { max-width: 1000px; margin: 0 auto; }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; margin-bottom: 30px; font-weight: 500; }
+        .back-link:hover { color: #fff; }
+        
+        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 8px; }
+        .subtitle { color: var(--text-muted); margin-bottom: 40px; }
+        
+        .grid-plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .plan-card { background: var(--bg-card); border: 1px solid var(--border); padding: 28px; border-radius: 16px; display: flex; flex-direction: column; }
+        
+        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+        .plan-title { font-weight: 700; font-size: 1.2rem; }
+        .price { font-weight: 800; font-size: 1.4rem; color: var(--primary); }
+        
+        .features { list-style: none; }
+        .features li { margin-bottom: 12px; color: var(--text-muted); font-size: 0.95rem; display: flex; align-items: center; gap: 10px; }
+        .features li i { color: var(--primary); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        
+        <h1>Choose your Discord plan.</h1>
+        <p class="subtitle">Bespoke dynamic features built natively for scale and performance stability.</p>
+        
+        <div class="grid-plan">
+            <div class="plan-card">
+                <div class="card-top">
+                    <span class="plan-title">Basic Bot</span>
+                    <span class="price">₹149</span>
+                </div>
+                <ul class="features">
+                    <li><i class="fa-solid fa-check"></i> Welcome & Leave Logs</li>
+                    <li><i class="fa-solid fa-check"></i> Basic Text Commands</li>
+                    <li><i class="fa-solid fa-check"></i> Moderation System</li>
+                    <li><i class="fa-solid fa-check"></i> Basic Configuration</li>
+                </ul>
+            </div>
+
+            <div class="plan-card">
+                <div class="card-top">
+                    <span class="plan-title">Standard Bot</span>
+                    <span class="price">₹299</span>
+                </div>
+                <ul class="features">
+                    <li><i class="fa-solid fa-check"></i> Everything in Basic</li>
+                    <li><i class="fa-solid fa-check"></i> Interactive Ticket Panels</li>
+                    <li><i class="fa-solid fa-check"></i> Action Logging Streams</li>
+                    <li><i class="fa-solid fa-check"></i> Auto Roles Allocation</li>
+                    <li><i class="fa-solid fa-check"></i> Buttons & Dropdown Menus</li>
+                </ul>
+            </div>
+
+            <div class="plan-card">
+                <div class="card-top">
+                    <span class="plan-title">Premium Bot</span>
+                    <span class="price">₹599</span>
+                </div>
+                <ul class="features">
+                    <li><i class="fa-solid fa-check"></i> Everything in Standard</li>
+                    <li><i class="fa-solid fa-check"></i> Secure Database Persistence</li>
+                    <li><i class="fa-solid fa-check"></i> Member Verification Nodes</li>
+                    <li><i class="fa-solid fa-check"></i> Economy / Level Systems</li>
+                    <li><i class="fa-solid fa-check"></i> Fully Custom Features</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
