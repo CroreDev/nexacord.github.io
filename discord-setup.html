@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexaCord • Guild Setup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-main: #05060c;
+            --bg-card: rgba(9, 11, 23, 0.7);
+            --text-main: #f3f4f6;
+            --text-muted: #94a3b8;
+            --primary: #5865f2;
+            --border: rgba(88, 101, 242, 0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { 
+            background-color: var(--bg-main); color: var(--text-main); padding: 40px 20px; line-height: 1.6;
+            background-image: radial-gradient(circle at 50% -20%, rgba(88, 101, 242, 0.15) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+        
+        .container { max-width: 1100px; margin: 0 auto; animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; margin-bottom: 40px; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+        .back-link:hover { color: #fff; }
+        
+        h1 { font-size: 2.75rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.03em; }
+        .subtitle { color: var(--text-muted); margin-bottom: 50px; font-size: 1.1rem; }
+        
+        .grid-plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 40px; }
+        .plan-card { 
+            background: var(--bg-card); border: 1px solid var(--border); padding: 36px; border-radius: 24px; 
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            display: flex; flex-direction: column; transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .plan-card:hover { transform: translateY(-6px); border-color: rgba(88, 101, 242, 0.3); box-shadow: 0 20px 40px rgba(88, 101, 242, 0.04); }
+        
+        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; }
+        .plan-title { font-weight: 700; font-size: 1.3rem; letter-spacing: -0.01em; }
+        .price { font-weight: 800; font-size: 1.5rem; color: #fff; background: linear-gradient(135deg, #fff, #7289da); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .features { list-style: none; margin-bottom: 24px; }
+        .features li { margin-bottom: 14px; color: var(--text-muted); font-size: 0.95rem; display: flex; align-items: center; gap: 12px; }
+        .features li i { color: var(--primary); font-size: 0.9rem; }
+
+        .custom-strip { background: linear-gradient(90deg, rgba(88, 101, 242, 0.05), rgba(9,11,23,0.7)); border: 1px solid var(--border); border-radius: 20px; padding: 24px 36px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .custom-strip h3 { font-size: 1.25rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Return to Home</a>
+        
+        <h1>Discord Server Architecture</h1>
+        <p class="subtitle">Highly organized layout models built for optimal member retention and security management.</p>
+        
+        <div class="grid-plan">
+            <div class="plan-card">
+                <div class="card-top">
+                    <span class="plan-title" style="color: #10b981;">🟢 Basic Layout</span>
+                    <span class="price">₹49</span>
+                </div>
+                <ul class="features">
+                    <li><i class="fa-solid fa-hashtag"></i> Organized Channels Layout</li>
+                    <li><i class="fa-solid fa-hashtag"></i> Logical Category Sorting</li>
+                    <li><i class="fa-solid fa-hashtag"></i> Essential Roles Hierarchy</li>
+                </ul>
+            </div>
+
+            <div class="plan-card">
+                <div class="card-top">
+                    <span class="plan-title" style="color: #3b82f6;">🔵 Advanced Build</span>
+                    <span class="price">₹149</span>
+                </div>
+                <ul class="features">
+                    <li><i class="fa-solid fa-hashtag"></i> Synced Category Permissions</li>
+                    <li><i class="fa-solid fa-hashtag"></i> Drop-down Ticket System</li>
+                    <li><i class="fa-solid fa-hashtag"></i> Automated Custom Welcome Log</li>
+                    <li><i class="fa-solid fa-hashtag"></i> Auto-Moderation Anti-Raid Locks</li>
+                </ul>
+            </div>
+
+            <div class="plan-card">
+                <div class="card-top">
+                    <span class="plan-title" style="color: #8b5cf6;">🟣 Premium Deployment</span>
+                    <span class="price">₹299</span>
+                </div>
+                <ul class="features">
+                    <li><i class="fa-solid fa-hashtag"></i> Everything in Advanced Build</li>
+                    <li><i class="fa-solid fa-hashtag"></i> Premium Clean Split-Visual Theme</li>
+                    <li><i class="fa-solid fa-hashtag"></i> Complex Self-Assign Reaction Roles</li>
+                    <li><i class="fa-solid fa-hashtag"></i> Turnkey Production Configuration</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="custom-strip">
+            <div>
+                <h3>⚫ Custom Server Network</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">For massive gaming hubs, multi-guild infrastructure links, or branding hubs.</p>
+            </div>
+            <span style="font-weight: 700; color: var(--primary);">Quote Required</span>
+        </div>
+    </div>
+
+</body>
+</html>
