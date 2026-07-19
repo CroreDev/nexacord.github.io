@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexaCord • Architecture Studio</title>
+    <title>NexaCord • Production Infrastructure Studio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -11,13 +11,13 @@
     
     <style>
         :root {
-            --bg-main: #04060a;
-            --bg-card: rgba(13, 17, 26, 0.7);
+            --bg-main: #020408;
+            --bg-card: rgba(6, 10, 20, 0.45);
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
-            --primary: #8b5cf6;
-            --primary-glow: rgba(139, 92, 246, 0.15);
-            --border: rgba(255, 255, 255, 0.06);
+            --primary: #a855f7;
+            --primary-glow: rgba(168, 85, 247, 0.25);
+            --border: rgba(255, 255, 255, 0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -27,23 +27,38 @@
             color: var(--text-main); 
             line-height: 1.6;
             overflow-x: hidden;
+            /* Immersive dark abstract mesh background */
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 40%);
+                linear-gradient(to bottom, rgba(2, 4, 8, 0.85), #020408),
+                url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1924&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
             background-attachment: fixed;
         }
 
-        /* Smooth Page Entrance Animation */
+        /* Ambient Glowing Orbs Overlay */
+        .glow-orb {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            top: -100px;
+            left: -100px;
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(40px);
+        }
+
         .animate-fade {
-            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Elegant Navbar */
         nav {
             max-width: 1200px;
             margin: 0 auto;
@@ -53,73 +68,117 @@
             align-items: center;
         }
         .logo { font-size: 1.5rem; font-weight: 800; color: #fff; letter-spacing: -0.03em; }
-        .logo span { color: var(--primary); }
+        .logo span { color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); }
         .nav-links { display: flex; gap: 28px; list-style: none; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s ease; }
-        .nav-links a:hover, .nav-links a.active { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.4); }
 
-        /* Hero */
-        header { max-width: 1200px; margin: 80px auto 40px; padding: 0 20px; text-align: center; }
+        header { max-width: 1200px; margin: 80px auto 60px; padding: 0 20px; text-align: center; }
         .hero-badge { 
             display: inline-flex; align-items: center; gap: 8px; 
-            background: var(--primary-glow); border: 1px solid rgba(139, 92, 246, 0.2); 
-            color: #c084fc; padding: 6px 18px; border-radius: 100px; 
+            background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); 
+            color: #d8b4fe; padding: 8px 20px; border-radius: 100px; 
             font-size: 0.8rem; font-weight: 700; margin-bottom: 24px;
-            text-transform: uppercase; letter-spacing: 0.05em;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
         }
-        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 20px; line-height: 1.1; background: linear-gradient(135deg, #fff 60%, #c084fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 620px; margin: 0 auto; font-weight: 400; }
+        h1 { font-size: 4.2rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 20px; line-height: 1.1; background: linear-gradient(135deg, #fff 50%, #c084fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: 1.25rem; color: var(--text-muted); max-width: 720px; margin: 0 auto; font-weight: 400; }
 
+        .stats-banner {
+            max-width: 1200px; margin: 0 auto 80px; padding: 0 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
+        }
+        .stat-item {
+            background: rgba(255,255,255,0.01); border: 1px solid var(--border);
+            backdrop-filter: blur(5px); padding: 24px; border-radius: 20px; text-align: center;
+            transition: border-color 0.3s;
+        }
+        .stat-item:hover { border-color: rgba(255,255,255,0.15); }
+        .stat-number { font-size: 2.4rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
+        .section-headline { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 50px; text-align: center; }
+        
         /* Category Grid Architecture */
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; margin-bottom: 100px; }
         
         .service-card { 
             background: var(--bg-card); 
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--border); 
-            border-radius: 24px; padding: 40px; 
-            display: flex; flex-direction: column; 
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
+            backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border); border-radius: 28px; padding: 44px; 
+            display: flex; flex-direction: column; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer; text-decoration: none; color: inherit;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            position: relative; overflow: hidden;
         }
-        
+        /* Top Card Glow effect line */
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: background 0.3s;
+        }
         .service-card:hover { 
-            transform: translateY(-8px); 
-            border-color: rgba(139, 92, 246, 0.3);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+            transform: translateY(-10px) scale(1.02); 
+            border-color: rgba(168, 85, 247, 0.4);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 30px rgba(168, 85, 247, 0.15);
+        }
+        .service-card:hover::before {
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
         }
         
         .icon-box { 
-            width: 56px; height: 56px; background: var(--primary-glow); 
-            border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 16px; 
+            width: 64px; height: 64px; background: rgba(255,255,255,0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; 
             display: flex; align-items: center; justify-content: center; 
-            color: var(--primary); font-size: 1.5rem; margin-bottom: 28px; 
-            transition: transform 0.3s ease;
+            color: #fff; font-size: 1.6rem; margin-bottom: 32px; transition: all 0.4s ease;
         }
-        .service-card:hover .icon-box { transform: scale(1.1) rotate(5deg); }
+        .service-card:hover .icon-box { 
+            background: var(--primary); 
+            border-color: var(--primary);
+            color: #fff;
+            transform: scale(1.1) rotate(4deg);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
         
-        h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 14px; letter-spacing: -0.02em; }
-        .card-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 32px; flex-grow: 1; line-height: 1.6; }
+        h3 { font-size: 1.55rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.02em; }
+        .card-desc { color: var(--text-muted); font-size: 0.98rem; margin-bottom: 36px; flex-grow: 1; line-height: 1.6; }
         
-        .explore-btn { display: inline-flex; align-items: center; gap: 8px; color: #fff; font-weight: 600; font-size: 0.95rem; margin-top: auto; transition: gap 0.2s; }
-        .service-card:hover .explore-btn { color: var(--primary); gap: 12px; }
+        .explore-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; margin-top: auto; transition: all 0.3s; }
+        .service-card:hover .explore-btn { color: #fff; gap: 14px; }
+
+        /* Why Choose Us Section */
+        .features-showcase {
+            background: rgba(255,255,255,0.01); border: 1px solid var(--border);
+            backdrop-filter: blur(10px); border-radius: 32px; padding: 60px 40px; margin-bottom: 100px;
+        }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; margin-top: 40px; }
+        .feat-item h4 { font-size: 1.2rem; margin-bottom: 10px; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .feat-item p { color: var(--text-muted); font-size: 0.95rem; }
 
         /* Ordering Pipeline Section */
-        .section-title { font-size: 1.75rem; font-weight: 700; margin: 80px 0 32px; display: flex; align-items: center; gap: 12px; }
-        .process-flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
-        .step-card { background: var(--bg-card); border: 1px solid var(--border); padding: 30px; border-radius: 20px; backdrop-filter: blur(10px); }
-        .step-num { font-size: 2rem; font-weight: 800; color: var(--primary); opacity: 0.4; margin-bottom: 12px; }
-        .step-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
-        .step-desc { font-size: 0.9rem; color: var(--text-muted); }
+        .section-title { font-size: 2rem; font-weight: 800; margin-bottom: 40px; text-align: center; }
+        .process-flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+        .step-card { background: var(--bg-card); border: 1px solid var(--border); backdrop-filter: blur(10px); padding: 36px; border-radius: 24px; position: relative; }
+        .step-num { font-size: 2.8rem; font-weight: 800; color: var(--primary); opacity: 0.15; position: absolute; top: 20px; right: 26px; }
+        .step-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; margin-top: 10px; }
+        .step-desc { font-size: 0.92rem; color: var(--text-muted); }
 
-        footer { text-align: center; padding: 60px 20px 40px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; margin-top: 100px; }
+        footer { border-top: 1px solid var(--border); padding: 80px 20px 40px; background: #010204; margin-top: 120px; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; padding-bottom: 60px; }
+        .footer-col h5 { font-size: 1rem; color: #fff; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .footer-col p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+        .footer-col ul li a:hover { color: var(--primary); }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; text-align: center; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 40px; color: var(--text-muted); font-size: 0.9rem; }
     </style>
 </head>
 <body>
+
+    <div class="glow-orb"></div>
 
     <nav class="animate-fade">
         <div class="logo">⚡ Nexa<span>Cord</span></div>
@@ -132,65 +191,112 @@
     </nav>
 
     <header class="animate-fade">
-        <div class="hero-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> High-Tier Performance Engineering</div>
-        <h1>Everything you need to<br>launch your project boldly.</h1>
-        <p class="hero-subtitle">Select a service category below to view our clear pricing schedules, design tiers, and feature frameworks.</p>
+        <div class="hero-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Elite Systems Infrastructure</div>
+        <h1>Performance Systems Engineered<br>For Scale and Execution.</h1>
+        <p class="hero-subtitle">We deploy custom server configurations, premium discord automation arrays, and hardened low-latency game networks engineered for modern digital hubs.</p>
     </header>
 
+    <div class="stats-banner animate-fade" style="animation-delay: 0.05s;">
+        <div class="stat-item"><div class="stat-number">250+</div><div class="stat-label">Deployments Completed</div></div>
+        <div class="stat-item"><div class="stat-number">99.9%</div><div class="stat-label">Uptime Architecture</div></div>
+        <div class="stat-item"><div class="stat-number">4.9/5</div><div class="stat-label">Client Trust Metric</div></div>
+        <div class="stat-item"><div class="stat-number">&lt; 24h</div><div class="stat-label">Average Delivery</div></div>
+    </div>
+
     <div class="container animate-fade" style="animation-delay: 0.1s;">
+        <h2 class="section-headline">Explore Specialist Service Layers</h2>
         <div class="grid-3">
-            <!-- Discord Bots Category Link -->
             <a href="bots.html" class="service-card">
-                <div class="icon-box"><i class="fa-solid fa-robot"></i></div>
+                <div class="icon-box" style="color:#c084fc"><i class="fa-solid fa-robot"></i></div>
                 <h3>Custom Discord Bots</h3>
-                <p class="card-desc">Tailor-made private application loops, persistent database storage, low-latency infrastructure, and interactive control panels.</p>
-                <span class="explore-btn">Explore Plans <i class="fa-solid fa-chevron-right"></i></span>
+                <p class="card-desc">Tailor-made private application loops, persistent database storage arrays, low-latency framework hooks, and fluid dashboard systems.</p>
+                <span class="explore-btn">Explore Full Plans <i class="fa-solid fa-chevron-right"></i></span>
             </a>
 
-            <!-- Discord Server Architecture Link -->
             <a href="discord-setup.html" class="service-card">
-                <div class="icon-box"><i class="fa-solid fa-network-wired"></i></div>
+                <div class="icon-box" style="color:#5865f2"><i class="fa-solid fa-network-wired"></i></div>
                 <h3>Discord Server Setup</h3>
-                <p class="card-desc">Stunning community architecture layouts, complex permission nodes, bulletproof anti-raid protection configurations, and clean role structures.</p>
-                <span class="explore-btn">Explore Plans <i class="fa-solid fa-chevron-right"></i></span>
+                <p class="card-desc">Stunning community architecture layouts, complex permission nodes, bulletproof anti-raid protection modules, and seamless role tiers.</p>
+                <span class="explore-btn">Explore Full Plans <i class="fa-solid fa-chevron-right"></i></span>
             </a>
 
-            <!-- Minecraft Services Link -->
             <a href="minecraft.html" class="service-card">
-                <div class="icon-box"><i class="fa-solid fa-cube"></i></div>
+                <div class="icon-box" style="color:#10b981"><i class="fa-solid fa-cube"></i></div>
                 <h3>Minecraft Services</h3>
-                <p class="card-desc">Deep optimization adjustments, exploit protection engineering, high-performance network maps, and clean core scaling alignments.</p>
-                <span class="explore-btn">Explore Plans <i class="fa-solid fa-chevron-right"></i></span>
+                <p class="card-desc">Deep engine structural profiling, packet-level security barriers, high-performance optimization, and absolute thread scaling setups.</p>
+                <span class="explore-btn">Explore Full Plans <i class="fa-solid fa-chevron-right"></i></span>
             </a>
         </div>
 
-        <div class="section-title"><i class="fa-solid fa-bars-staged" style="color:var(--primary)"></i> How To Order</div>
+        <div class="features-showcase">
+            <h2 style="text-align: center; font-weight: 800; font-size: 1.8rem;">Engineered To Outperform Standard Setups</h2>
+            <div class="features-grid">
+                <div class="feat-item">
+                    <h4><i class="fa-solid fa-bolt" style="color: #eab308"></i> Proactive Optimization</h4>
+                    <p>We do not just install systems; we refactor configurations to minimize overhead resource demands.</p>
+                </div>
+                <div class="feat-item">
+                    <h4><i class="fa-solid fa-shield" style="color: #3b82f6"></i> Hardened By Default</h4>
+                    <p>Every framework deployment undergoes explicit stress-testing to survive severe exploit vectors.</p>
+                </div>
+                <div class="feat-item">
+                    <h4><i class="fa-solid fa-code" style="color: #10b981"></i> Clean Codebase Tiers</h4>
+                    <p>No messy dependency paths or bloated configs. Clean, modular, and maintainable systems only.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Seamless Fulfillment Protocol</h2>
         <div class="process-flow">
             <div class="step-card">
                 <div class="step-num">01</div>
-                <div class="step-title">Open Ticket</div>
-                <div class="step-desc">Head to our Discord and click the Create Order button.</div>
+                <div class="step-title">Initialize Ticket</div>
+                <div class="step-desc">Head directly to our main support terminal inside Discord and activate a workspace ticket.</div>
             </div>
             <div class="step-card">
                 <div class="step-num">02</div>
-                <div class="step-title">Fill Form</div>
-                <div class="step-desc">Provide your target plan, budget limits, and project brief.</div>
+                <div class="step-title">Specify Architecture</div>
+                <div class="step-desc">Provide your target plan tier, features requested, system scopes, and scaling limits.</div>
             </div>
             <div class="step-card">
                 <div class="step-num">03</div>
-                <div class="step-title">Review & Pay</div>
-                <div class="step-desc">Approve the quote and process safe checkout via Google Pay.</div>
+                <div class="step-title">Process Remittance</div>
+                <div class="step-desc">Approve the structured work breakdown quote and complete secure verification checkout.</div>
             </div>
             <div class="step-card">
                 <div class="step-num">04</div>
-                <div class="step-title">Get Delivery</div>
-                <div class="step-desc">Receive your finished framework right inside your private channel.</div>
+                <div class="step-title">System Handoff</div>
+                <div class="step-desc">Receive your clean framework archives and live deployment links directly in your hub channel.</div>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 NexaCord Systems. Engineered with absolute precision.</p>
+        <div class="footer-content">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 16px;">⚡ Nexa<span>Cord</span></div>
+                <p>Architecting robust infrastructure and high-efficiency custom systems for community hubs worldwide.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Product Segments</h5>
+                <ul>
+                    <li><a href="bots.html">Custom Applications</a></li>
+                    <li><a href="discord-setup.html">Server Architecture</a></li>
+                    <li><a href="minecraft.html">Game Node Infrastructure</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Support Portals</h5>
+                <ul>
+                    <li><a href="#">Official Discord Terminal</a></li>
+                    <li><a href="#">Service Terms Protocol</a></li>
+                    <li><a href="#">Status Monitor Matrix</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 NexaCord Studio. All rights reserved globally.</p>
+        </div>
     </footer>
 
 </body>
